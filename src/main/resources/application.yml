@@ -37,11 +37,6 @@ spring:
 
 # Application-specific config
 app:
-  supabase:
-    url: ${SUPABASE_URL:your-supabase-url-here}
-    anon-key: ${SUPABASE_ANON_KEY:your-supabase-anon-key-here}
-    table-name: documents
-    match-function: match_documents
   github:
     token: ${GITHUB_TOKEN:your-github-token-here}
     username: ${GITHUB_USERNAME:hungpt99-dev}

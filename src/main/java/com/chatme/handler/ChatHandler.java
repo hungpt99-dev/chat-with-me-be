@@ -3,10 +3,6 @@ package com.chatme.handler;
 import com.chatme.dto.ChatMessage;
 import com.chatme.dto.ChatRequest;
 import com.fast.cqrs.cqrs.QueryHandler;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatModel;
@@ -16,10 +12,12 @@ import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -36,11 +34,7 @@ public class ChatHandler implements QueryHandler<ChatRequest, SseEmitter> {
 
     private final ChatModel chatModel;
     private final EmbeddingModel embeddingModel;
-    private final RestClient supabaseRestClient;
-    private final ObjectMapper objectMapper;
-
-    @Value("${app.supabase.match-function}")
-    private String matchFunction;
+    private final JdbcTemplate jdbcTemplate;
 
     private static final String SYSTEM_PROMPT = """
         You are Hung Pham, a full-stack developer answering questions about yourself on your portfolio website.
@@ -72,12 +66,10 @@ public class ChatHandler implements QueryHandler<ChatRequest, SseEmitter> {
     public ChatHandler(
             ChatModel chatModel,
             EmbeddingModel embeddingModel,
-            @Qualifier("supabaseRestClient") RestClient supabaseRestClient,
-            ObjectMapper objectMapper) {
+            JdbcTemplate jdbcTemplate) {
         this.chatModel = chatModel;
         this.embeddingModel = embeddingModel;
-        this.supabaseRestClient = supabaseRestClient;
-        this.objectMapper = objectMapper;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
@@ -165,30 +157,19 @@ public class ChatHandler implements QueryHandler<ChatRequest, SseEmitter> {
         try {
             // Use Spring AI's EmbeddingModel
             float[] embedding = embeddingModel.embed(question);
+            String embeddingString = Arrays.toString(embedding); // [0.1, 0.2, ...] format works for PGVector
 
-            ObjectNode rpcBody = objectMapper.createObjectNode();
-            rpcBody.put("query_embedding", objectMapper.writeValueAsString(embedding));
-            rpcBody.put("match_count", 5);
-            rpcBody.put("match_threshold", 0.5);
+            // Search using PGVector cosine distance (<->)
+            String sql = "SELECT content FROM documents ORDER BY embedding <-> ?::vector LIMIT 5";
+            
+            List<String> results = jdbcTemplate.query(sql, 
+                (rs, rowNum) -> rs.getString("content"), 
+                embeddingString
+            );
 
-            String response = supabaseRestClient.post()
-                    .uri("/rest/v1/rpc/" + matchFunction)
-                    .body(objectMapper.writeValueAsString(rpcBody))
-                    .retrieve()
-                    .body(String.class);
+            if (results.isEmpty()) return null;
 
-            if (response == null) return null;
-
-            JsonNode docs = objectMapper.readTree(response);
-            if (!docs.isArray() || docs.isEmpty()) return null;
-
-            StringBuilder context = new StringBuilder();
-            for (JsonNode doc : docs) {
-                if (doc.has("content")) {
-                    context.append(doc.get("content").asText()).append("\n\n");
-                }
-            }
-            return context.toString();
+            return String.join("\n\n", results);
 
         } catch (Exception e) {
             log.error("Error searching vector store", e);

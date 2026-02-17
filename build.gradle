@@ -50,6 +50,7 @@ dependencies {
     // Database
     runtimeOnly 'com.h2database:h2'              // local dev
     runtimeOnly 'org.postgresql:postgresql'        // production (Render)
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc' // For JdbcTemplate vector search
 
     // Actuator (health checks for Render)
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
