@@ -2,8 +2,11 @@
 # Multi-stage Docker build for chat-with-me-be
 # ============================================
 
-# Stage 1: Build
 FROM eclipse-temurin:25-jdk AS builder
+ARG GITHUB_USERNAME
+ARG GITHUB_TOKEN
+ENV GITHUB_USERNAME=$GITHUB_USERNAME
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
 WORKDIR /workspace
 
 # Copy project files (context is now the repo root)
