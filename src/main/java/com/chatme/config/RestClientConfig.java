@@ -21,5 +21,10 @@ public class RestClientConfig {
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
     }
+
+    @Bean
+    public com.fasterxml.jackson.databind.ObjectMapper objectMapper() {
+        return new com.fasterxml.jackson.databind.ObjectMapper();
+    }
 }
 
