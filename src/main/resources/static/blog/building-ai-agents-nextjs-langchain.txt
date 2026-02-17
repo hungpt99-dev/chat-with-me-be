@@ -1,0 +1,166 @@
+1:"$Sreact.fragment"
+2:I[63479,["335","static/chunks/335-ebaa30ec5d8be766.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","552","static/chunks/552-7a1a7c42975f72da.js","298","static/chunks/298-4e2d45a58d8b8e81.js","177","static/chunks/app/layout-aa3aaf2a5ede1856.js"],"ThemeProvider"]
+3:I[94559,["335","static/chunks/335-ebaa30ec5d8be766.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","552","static/chunks/552-7a1a7c42975f72da.js","298","static/chunks/298-4e2d45a58d8b8e81.js","177","static/chunks/app/layout-aa3aaf2a5ede1856.js"],"NextUIProvider"]
+4:I[38822,["335","static/chunks/335-ebaa30ec5d8be766.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","552","static/chunks/552-7a1a7c42975f72da.js","298","static/chunks/298-4e2d45a58d8b8e81.js","177","static/chunks/app/layout-aa3aaf2a5ede1856.js"],"default"]
+5:I[9766,[],""]
+6:I[98924,[],""]
+7:I[95249,["335","static/chunks/335-ebaa30ec5d8be766.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","552","static/chunks/552-7a1a7c42975f72da.js","298","static/chunks/298-4e2d45a58d8b8e81.js","177","static/chunks/app/layout-aa3aaf2a5ede1856.js"],"default"]
+9:I[24431,[],"OutletBoundary"]
+b:I[15278,[],"AsyncMetadataOutlet"]
+d:I[24431,[],"ViewportBoundary"]
+f:I[24431,[],"MetadataBoundary"]
+10:"$Sreact.suspense"
+12:I[57150,[],""]
+:HL["/_next/static/media/e4af272ccee01ff0-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/css/aea965b6eab027a3.css","style"]
+0:{"P":null,"b":"N-0l2p-6kjCD7mOd-93Pj","p":"","c":["","blog","building-ai-agents-nextjs-langchain"],"i":false,"f":[[["",{"children":["blog",{"children":[["id","building-ai-agents-nextjs-langchain","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/aea965b6eab027a3.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":["$","body",null,{"className":"__className_f367f3 antialiased","suppressHydrationWarning":true,"children":["$","$L2",null,{"attribute":"class","defaultTheme":"dark","enableSystem":true,"disableTransitionOnChange":true,"children":["$","$L3",null,{"children":["$","div",null,{"className":"min-h-screen bg-background text-foreground","children":[["$","$L4",null,{}],["$","main",null,{"className":"py-8 px-4 md:px-6 mx-auto max-w-7xl","children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","footer",null,{"className":"fixed bottom-0 left-0 w-full bg-white","children":["$","$L7",null,{}]}]]}]}]}]}]}]]}],{"children":["blog",["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["id","building-ai-agents-nextjs-langchain","d"],["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L8",null,["$","$L9",null,{"children":["$La",["$","$Lb",null,{"promise":"$@c"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,[["$","$Ld",null,{"children":"$Le"}],["$","meta",null,{"name":"next-size-adjust","content":""}]],["$","$Lf",null,{"children":["$","div",null,{"hidden":true,"children":["$","$10",null,{"fallback":null,"children":"$L11"}]}]}]]}],false]],"m":"$undefined","G":["$12",[]],"s":false,"S":true}
+13:I[52619,["335","static/chunks/335-ebaa30ec5d8be766.js","356","static/chunks/356-47b75043c8e7fd96.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","242","static/chunks/242-225df27543a9ab2e.js","567","static/chunks/app/blog/%5Bid%5D/page-8e144e2fb57494e5.js"],""]
+14:I[81356,["335","static/chunks/335-ebaa30ec5d8be766.js","356","static/chunks/356-47b75043c8e7fd96.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","242","static/chunks/242-225df27543a9ab2e.js","567","static/chunks/app/blog/%5Bid%5D/page-8e144e2fb57494e5.js"],"Image"]
+15:I[90286,["335","static/chunks/335-ebaa30ec5d8be766.js","356","static/chunks/356-47b75043c8e7fd96.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","242","static/chunks/242-225df27543a9ab2e.js","567","static/chunks/app/blog/%5Bid%5D/page-8e144e2fb57494e5.js"],"default"]
+16:I[8085,["335","static/chunks/335-ebaa30ec5d8be766.js","356","static/chunks/356-47b75043c8e7fd96.js","619","static/chunks/619-1108b4c084a63a2d.js","26","static/chunks/26-c8312ff7df085f9c.js","242","static/chunks/242-225df27543a9ab2e.js","567","static/chunks/app/blog/%5Bid%5D/page-8e144e2fb57494e5.js"],"default"]
+17:T171d,
+In recent years, the field of artificial intelligence has seen remarkable advancements, particularly in the area of language models and AI agents. These intelligent systems can understand, process, and generate human-like text, opening up a world of possibilities for developers and businesses alike. In this comprehensive guide, we'll explore how to build AI agents using two powerful tools: Next.js and LangChain.
+
+## Understanding AI Agents
+
+Before we dive into the technical details, let's clarify what we mean by AI agents. An AI agent is a system that can perceive its environment, make decisions, and take actions to achieve specific goals. In the context of natural language processing, these agents can engage in conversations, answer questions, and perform tasks based on textual input.
+
+## Why Next.js and LangChain?
+
+Next.js is a popular React framework that enables you to build server-side rendered and statically generated web applications. Its robust features and optimizations make it an excellent choice for creating performant AI-powered web apps.
+
+LangChain, on the other hand, is a powerful library designed to assist developers in creating applications with large language models (LLMs). It provides a set of tools and abstractions that simplify the process of building complex AI agents.
+
+## Getting Started
+
+To begin building your AI agent, you'll need to set up a Next.js project and install the necessary dependencies. Here's a quick start guide:
+
+1. Create a new Next.js project:
+   ```bash
+   npx create-next-app ai-agent-project
+   cd ai-agent-project
+   ```
+
+2. Install LangChain and other required packages:
+   ```bash
+   npm install langchain @langchain/openai
+   ```
+
+3. Set up your OpenAI API key in a `.env.local` file:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
+
+## Building the AI Agent
+
+Now that we have our environment set up, let's create a simple AI agent that can answer questions. We'll use the OpenAI language model through LangChain.
+
+Create a new file `pages/api/ai-agent.js`:
+
+```javascript
+import { OpenAI } from "langchain/llms/openai";
+import { ConversationalRetrievalQAChain } from "langchain/chains";
+import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { question } = req.body;
+
+    const model = new OpenAI({});
+    const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
+    const docs = await textSplitter.createDocuments([`Your knowledge base text here`]);
+
+    const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
+    const chain = ConversationalRetrievalQAChain.fromLLM(
+      model,
+      vectorStore.asRetriever()
+    );
+
+    const response = await chain.call({
+      question: question,
+      chat_history: [],
+    });
+
+    res.status(200).json({ answer: response.text });
+  } else {
+    res.status(405).json({ message: 'Method not allowed' });
+  }
+}
+```
+
+This code sets up an AI agent that can answer questions based on a given knowledge base. It uses LangChain's `ConversationalRetrievalQAChain` to create a question-answering system with memory.
+
+## Creating the Frontend
+
+Now, let's create a simple frontend to interact with our AI agent. Update your `pages/index.js`:
+
+```jsx
+import { useState } from 'react';
+
+export default function Home() {
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('/api/ai-agent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ question }),
+    });
+    const data = await response.json();
+    setAnswer(data.answer);
+  };
+
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">AI Agent Q&A</h1>
+      <form onSubmit={handleSubmit} className="mb-4">
+        <input
+          type="text"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          className="border p-2 mr-2"
+          placeholder="Ask a question"
+        />
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          Ask
+        </button>
+      </form>
+      {answer && (
+        <div className="bg-gray-100 p-4 rounded">
+          <h2 className="font-bold mb-2">Answer:</h2>
+          <p>{answer}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+Building AI agents with Next.js and LangChain opens up a world of possibilities for creating intelligent, conversational interfaces. This guide has provided a foundation for getting started, but there's so much more to explore. You can enhance your agent by:
+
+1. Implementing more advanced LangChain features like agents and tools
+2. Integrating with external APIs to provide real-time data
+3. Customizing the language model's behavior with fine-tuning
+4. Implementing conversation history and context management
+
+As AI technology continues to evolve, the potential applications for AI agents are boundless. Whether you're building a customer service bot, a personal assistant, or a knowledge management system, the combination of Next.js and LangChain provides a powerful toolkit for bringing your ideas to life.
+
+Remember to always consider ethical implications and potential biases when developing AI systems. With great power comes great responsibility, and it's up to us as developers to ensure that our AI agents are fair, transparent, and beneficial to society.
+
+Happy coding, and may your AI agents be ever intelligent and helpful!8:["$","div",null,{"className":"max-w-7xl mx-auto px-4 py-12","children":[["$","$L13",null,{"href":"/blog","className":"inline-flex items-center text-blue-600 hover:text-blue-800 mb-6 transition-colors duration-200","children":[["$","svg",null,{"ref":"$undefined","xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-arrow-left mr-2","aria-hidden":"true","children":[["$","path","1l729n",{"d":"m12 19-7-7 7-7"}],["$","path","x3x0zl",{"d":"M19 12H5"}],"$undefined"]}],["$","span",null,{"className":"text-lg","children":"Back to blog"}]]}],["$","div",null,{"className":"grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8","children":[["$","div",null,{"className":"max-w-3xl mx-auto lg:mx-0 w-full","children":[["$","h1",null,{"className":"text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight","children":"Building AI Agents with Next.js and LangChain: A Comprehensive Guide"}],["$","div",null,{"className":"flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-8 space-x-4","children":[["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"ref":"$undefined","xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-calendar mr-2","aria-hidden":"true","children":[["$","path","1cmpym",{"d":"M8 2v4"}],["$","path","4m81vk",{"d":"M16 2v4"}],["$","rect","1hopcy",{"width":"18","height":"18","x":"3","y":"4","rx":"2"}],["$","path","8toen8",{"d":"M3 10h18"}],"$undefined"]}],"2023-07-15"]}],["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"ref":"$undefined","xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-clock mr-2","aria-hidden":"true","children":[["$","circle","1mglay",{"cx":"12","cy":"12","r":"10"}],["$","polyline","68esgv",{"points":"12 6 12 12 16 14"}],"$undefined"]}],"4 min read"]}],["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"ref":"$undefined","xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-tag mr-2","aria-hidden":"true","children":[["$","path","vktsd0",{"d":"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"}],["$","circle","kqv944",{"cx":"7.5","cy":"7.5","r":".5","fill":"currentColor"}],"$undefined"]}],"Artificial Intelligence"]}],["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"ref":"$undefined","xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-user mr-2","aria-hidden":"true","children":[["$","path","975kel",{"d":"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],["$","circle","17ys0d",{"cx":"12","cy":"7","r":"4"}],"$undefined"]}],"Hung Pham"]}]]}],["$","$L14",null,{"src":"$undefined","alt":"Building AI Agents with Next.js and LangChain: A Comprehensive Guide","width":800,"height":400,"className":"rounded-lg mb-8 object-cover w-full"}],["$","div",null,{"className":"block lg:hidden mb-8","children":["$","$L15",null,{"className":"bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg shadow-sm"}]}],["$","article",null,{"className":"overflow-hidden","children":[["$","$L16",null,{"content":"$17"}],"$L18","$L19"]}]]}],"$L1a"]}]]}]
+18:["$","div",null,{"className":"mt-12","children":[["$","h3",null,{"className":"text-2xl font-semibold mb-4 text-gray-900 dark:text-white","children":"Tags"}],["$","div",null,{"className":"flex flex-wrap gap-2 mb-12","children":[["$","span","AI",{"className":"bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium","children":"AI"}],["$","span","Next.js",{"className":"bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium","children":"Next.js"}],["$","span","LangChain",{"className":"bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium","children":"LangChain"}],["$","span","Web Development",{"className":"bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium","children":"Web Development"}]]}],["$","div",null,{"className":"mt-8","children":[["$","h2",null,{"className":"text-2xl font-bold mb-4","children":"Related Posts"}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-4","children":[["$","a","complete_openai_api_guide",{"className":"block rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 p-6","href":"/blog/complete_openai_api_guide","children":[["$","h3",null,{"className":"text-lg font-semibold text-gray-900 dark:text-white","children":"The Complete Guide to OpenAI API: A Practical Developer's Handbook"}],["$","p",null,{"className":"text-gray-600 dark:text-gray-400 leading-relaxed","children":"Explore a complete guide to the OpenAI API, covering everything from setup and core functionality to advanced features, performance optimization, error handling, and practical use cases. Perfect for developers looking to integrate and leverage OpenAI models effectively."}]]}]]}]]}]]}]
+19:["$","div",null,{"className":"mt-16 pt-8 border-t border-gray-200 dark:border-gray-700","children":[["$","h3",null,{"className":"text-2xl font-semibold mb-6 text-gray-900 dark:text-white","children":"About the Author"}],["$","div",null,{"className":"flex items-center bg-gray-100 dark:bg-gray-800 p-6 rounded-lg","children":[["$","$L14",null,{"src":{"src":"/_next/static/media/LowkeyDev.9bd0d6a3.png","height":320,"width":320,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAPFBMVEX9/f3Bu7Pn5eKMfnCrm5abhH3z8fH5+fl1YVP39/eEal6CXlqIc2q7sKm0qKSakIzV0c1IMimgb23W0dGyihgCAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAOklEQVR4nAXBhQHAIBAAsYN3rLb/rk2IzwmiCDvlXR10bU0r6qTKo+Bmr60LXOYcowE7M6VDxN1ap34/JwGqUX/NFwAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":8},"alt":"Hung Pham","width":80,"height":80,"className":"rounded-full mr-6"}],["$","div",null,{"children":[["$","h4",null,{"className":"text-xl font-semibold mb-2 text-gray-900 dark:text-white","children":"Hung Pham"}],["$","p",null,{"className":"text-gray-600 dark:text-gray-400 leading-relaxed","children":"A passionate Software Developer and technologist exploring the intersections of code and creativity."}]]}]]}]]}]
+1a:["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"sticky top-24","children":["$","$L15",null,{"className":"bg-gray-50 dark:bg-gray-800/50 p-3 rounded-lg shadow-sm"}]}]}]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+a:null
+1b:I[80622,[],"IconMark"]
+c:{"metadata":[["$","title","0",{"children":"Building AI Agents with Next.js and LangChain: A Comprehensive Guide | Hung Pham"}],["$","meta","1",{"name":"description","content":"Explore the fascinating world of AI agents and learn how to build them using Next.js and LangChain. This guide covers everything from the basics to advanced techniques."}],["$","link","2",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}],["$","$L1b","3",{}]],"error":null,"digest":"$undefined"}
+11:"$c:metadata"
