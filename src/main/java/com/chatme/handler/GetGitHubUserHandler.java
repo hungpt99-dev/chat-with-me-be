@@ -1,0 +1,71 @@
+package com.chatme.handler;
+
+import com.chatme.dto.GetGitHubUserQuery;
+import com.chatme.dto.GitHubUserDto;
+import com.fast.cqrs.cqrs.QueryHandler;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClient;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * Handler for getting GitHub user profile.
+ */
+@Component
+public class GetGitHubUserHandler implements QueryHandler<GetGitHubUserQuery, GitHubUserDto> {
+
+    private static final Logger log = LoggerFactory.getLogger(GetGitHubUserHandler.class);
+    private static final long CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
+
+    private final RestClient githubRestClient;
+    private final ObjectMapper objectMapper;
+
+    @Value("${app.github.username}")
+    private String username;
+
+    private final Map<String, CacheEntry> cache = new ConcurrentHashMap<>();
+
+    private record CacheEntry(Object data, long timestamp) {
+        boolean isValid() {
+            return System.currentTimeMillis() - timestamp < CACHE_DURATION_MS;
+        }
+    }
+
+    public GetGitHubUserHandler(
+            @Qualifier("githubRestClient") RestClient githubRestClient,
+            ObjectMapper objectMapper) {
+        this.githubRestClient = githubRestClient;
+        this.objectMapper = objectMapper;
+    }
+
+    @Override
+    public GitHubUserDto handle(GetGitHubUserQuery query) {
+        String cacheKey = "user:" + username;
+        CacheEntry cached = cache.get(cacheKey);
+        if (cached != null && cached.isValid()) {
+            return (GitHubUserDto) cached.data();
+        }
+
+        try {
+            String response = githubRestClient.get()
+                    .uri("/users/{username}", username)
+                    .retrieve()
+                    .body(String.class);
+
+            GitHubUserDto user = objectMapper.readValue(response, GitHubUserDto.class);
+            cache.put(cacheKey, new CacheEntry(user, System.currentTimeMillis()));
+            return user;
+
+        } catch (Exception e) {
+            log.error("Error fetching GitHub user", e);
+            throw new RuntimeException("Failed to fetch GitHub user", e);
+        }
+    }
+}

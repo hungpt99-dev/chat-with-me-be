@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: chat-with-me-be/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_USERNAME=${GITHUB_USERNAME:-hungpt99-dev}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

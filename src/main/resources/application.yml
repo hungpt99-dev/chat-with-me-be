@@ -1,0 +1,71 @@
+server:
+  port: ${PORT:8081}
+
+spring:
+  application:
+    name: chat-with-me-be
+  main:
+    allow-circular-references: true
+
+  # PostgreSQL on Render
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:chatmedb}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  # Spring AI - OpenAI
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:your-openai-api-key-here}
+      chat:
+        options:
+          model: gpt-4.1-nano
+          temperature: 0.7
+      embedding:
+        options:
+          model: text-embedding-3-small
+
+# Application-specific config
+app:
+  supabase:
+    url: ${SUPABASE_URL:your-supabase-url-here}
+    anon-key: ${SUPABASE_ANON_KEY:your-supabase-anon-key-here}
+    table-name: documents
+    match-function: match_documents
+  github:
+    token: ${GITHUB_TOKEN:your-github-token-here}
+    username: ${GITHUB_USERNAME:hungpt99-dev}
+  rate-limit:
+    max-tokens: 10
+    refill-per-second: 1
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000}
+
+# Actuator for health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    root: INFO
+    com.chatme: ${LOG_LEVEL:DEBUG}
+    FRAMEWORK_HTTP: WARN
+    FRAMEWORK_TRACE: WARN
+    FRAMEWORK_BIZ: WARN
+    FRAMEWORK_EXCEPTION: ERROR

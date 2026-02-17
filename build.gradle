@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.chatme'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:2.0.0-M1"
+    }
+}
+
+dependencies {
+    // Fast Framework
+    implementation 'com.fast:fast-starter:1.0.0-SNAPSHOT'
+    annotationProcessor 'com.fast:fast-processor:1.0.0-SNAPSHOT'
+
+    // Spring Boot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Spring AI - OpenAI (auto-configures ChatModel + EmbeddingModel)
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
+    // WebFlux for streaming (Flux/SSE support)
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Jackson JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.40'
+    annotationProcessor 'org.projectlombok:lombok:1.18.40'
+
+    // Database
+    runtimeOnly 'com.h2database:h2'              // local dev
+    runtimeOnly 'org.postgresql:postgresql'        // production (Render)
+
+    // Actuator (health checks for Render)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+

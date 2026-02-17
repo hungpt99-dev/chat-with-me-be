@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'chat-with-me-be'
+
+// Include the local fast-framework build
+includeBuild('../fast-framework')

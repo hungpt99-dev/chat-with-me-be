@@ -1,0 +1,2 @@
+-- Schema for fast-framework (minimal, no business tables needed)
+-- This file is required by fast-framework's SQL init
