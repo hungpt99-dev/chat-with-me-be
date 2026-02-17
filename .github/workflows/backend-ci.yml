@@ -84,3 +84,7 @@ jobs:
           build-args: |
             GITHUB_USERNAME=${{ github.actor }}
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger Render Deployment
+        if: success()
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
