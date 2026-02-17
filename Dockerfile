@@ -4,27 +4,22 @@
 
 # Stage 1: Build
 FROM eclipse-temurin:25-jdk AS builder
-
 WORKDIR /workspace
 
-# Copy fast-framework (composite build dependency)
-COPY fast-framework/ fast-framework/
+# Copy project files (context is now the repo root)
+COPY . .
 
-# Copy backend project
-COPY chat-with-me-be/ chat-with-me-be/
-
-WORKDIR /workspace/chat-with-me-be
-
-# Build the application (skip tests in Docker build)
+# Build with Gradle configurations
+# - settings.gradle will switch to published artifact if fast-framework is missing
+# - build.gradle will use GITHUB_TOKEN to fetch it from GitHub Packages
 RUN chmod +x gradlew && ./gradlew bootJar -x test --no-daemon
 
 # Stage 2: Runtime
 FROM eclipse-temurin:25-jre
-
 WORKDIR /app
 
-# Copy the built JAR
-COPY --from=builder /workspace/chat-with-me-be/build/libs/*.jar app.jar
+# Copy the built JAR (path relative to project root in workspace)
+COPY --from=builder /workspace/build/libs/*.jar app.jar
 
 # Non-root user for security
 RUN groupadd -r appuser && useradd -r -g appuser appuser

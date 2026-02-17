@@ -1,0 +1,47 @@
+# Render Blueprint
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: chatme-db
+    plan: free
+    databaseName: chatme
+    user: chatme
+
+services:
+  - type: web
+    name: chat-with-me-be
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    envVars:
+      # Server
+      - key: PORT
+        value: 8081
+      # Database (auto-linked from Render PostgreSQL)
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chatme-db
+          property: connectionString
+      - key: DB_DRIVER
+        value: org.postgresql.Driver
+      - key: DB_USERNAME
+        fromDatabase:
+          name: chatme-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: chatme-db
+          property: password
+      # OpenAI
+      - key: OPENAI_API_KEY
+        sync: false
+      # GitHub
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_USERNAME
+        value: hungpt99-dev
+      # CORS (set to your Vercel frontend URL)
+      - key: CORS_ORIGINS
+        sync: false

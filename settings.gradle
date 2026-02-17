@@ -7,5 +7,7 @@ pluginManagement {
 
 rootProject.name = 'chat-with-me-be'
 
-// Include the local fast-framework build
-includeBuild('../fast-framework')
+// Include the local fast-framework build if it exists (local dev), otherwise use published artifact (Render/CI)
+if (file('../fast-framework').exists()) {
+    includeBuild('../fast-framework')
+}

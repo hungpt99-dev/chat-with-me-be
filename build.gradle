@@ -17,6 +17,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
+    maven {
+        url = uri("https://maven.pkg.github.com/hungpt99-dev/fast-framework")
+        credentials {
+            username = System.getenv("GITHUB_USERNAME") ?: "hungpt99-dev"
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencyManagement {
