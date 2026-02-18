@@ -33,6 +33,7 @@ spring:
           options:
             temperature: 0.7
         embedding:
+          api-key: ${GEMINI_API_KEY}
           enabled: true
           model: text-embedding-004
 
