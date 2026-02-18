@@ -23,16 +23,16 @@ spring:
       mode: always
       schema-locations: classpath:schema.sql
 
-  # Spring AI - Google Gemini
+  # Spring AI - Google Gemini (GenAI)
   ai:
-    gemini:
-      api-key: ${GEMINI_API_KEY}
-      chat:
-        options:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
           model: gemini-1.5-flash
-          temperature: 0.7
-      embedding:
-        options:
+          options:
+            temperature: 0.7
+        embedding:
           model: text-embedding-004
 
 # Application-specific config
