@@ -43,6 +43,8 @@ dependencies {
 
     // Spring AI - Google AI Gemini (API Key based)
     implementation 'org.springframework.ai:spring-ai-starter-model-google-genai'
+    // Explicit embedding support (if not in starter-model)
+    implementation 'org.springframework.ai:spring-ai-google-genai-embedding'
 
     // WebFlux for streaming (Flux/SSE support)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
