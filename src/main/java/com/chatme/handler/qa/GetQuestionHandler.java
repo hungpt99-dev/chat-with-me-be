@@ -27,10 +27,8 @@ public class GetQuestionHandler implements QueryHandler<GetQuestionQuery, Questi
         // Increment views
         questionRepository.incrementViews(query.id());
 
-        Question q = questionRepository.findById(query.id());
-        if (q == null) {
-            throw new RuntimeException("Question not found");
-        }
+        Question q = questionRepository.findById(query.id())
+            .orElseThrow(() -> new RuntimeException("Question not found"));
 
         return mapQuestion(q);
     }
