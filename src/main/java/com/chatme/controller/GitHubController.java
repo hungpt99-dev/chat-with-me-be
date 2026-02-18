@@ -5,6 +5,7 @@ import com.chatme.dto.GetGitHubUserQuery;
 import com.chatme.dto.GitHubInsightsDto;
 import com.chatme.dto.GitHubUserDto;
 import com.chatme.handler.GetGitHubInsightsHandler;
+import com.chatme.handler.GetGitHubReposHandler;
 import com.chatme.handler.GetGitHubUserHandler;
 import com.fast.cqrs.cqrs.annotation.HttpController;
 import com.fast.cqrs.cqrs.annotation.Query;
@@ -23,4 +24,8 @@ public interface GitHubController {
     @GetMapping("/user")
     @Query(handler = GetGitHubUserHandler.class, cache = "5m")
     GitHubUserDto getUser(@ModelAttribute GetGitHubUserQuery query);
+
+    @GetMapping("/repos")
+    @Query(handler = GetGitHubReposHandler.class, cache = "10m")
+    java.util.List<com.chatme.dto.GitHubRepoDto> getRepos(@ModelAttribute com.chatme.dto.GetGitHubReposQuery query);
 }

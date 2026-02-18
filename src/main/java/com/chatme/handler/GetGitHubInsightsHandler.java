@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsQuery, GitHubInsightsDto> {
 
     private static final Logger log = LoggerFactory.getLogger(GetGitHubInsightsHandler.class);
-    private static final long CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
+    private static final long CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
 
     private final RestClient githubRestClient;
     private final ObjectMapper objectMapper;
