@@ -19,7 +19,7 @@ public interface QaController {
     @PostMapping("/questions")
     @ResponseStatus(HttpStatus.CREATED)
     @Command(handler = CreateQuestionHandler.class)
-    void createQuestion(@RequestBody CreateQuestionCmd cmd);
+    void createQuestion(@RequestBody CreateQuestionRequest request);
 
     @GetMapping("/questions/{id}")
     @Query(handler = GetQuestionHandler.class)

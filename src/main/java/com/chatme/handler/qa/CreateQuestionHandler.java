@@ -1,6 +1,6 @@
 package com.chatme.handler.qa;
 
-import com.chatme.dto.qa.CreateQuestionCmd;
+import com.chatme.dto.qa.CreateQuestionRequest;
 import com.chatme.entity.Question;
 import com.chatme.repository.QuestionRepository;
 import com.fast.cqrs.cqrs.CommandHandler;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CreateQuestionHandler implements CommandHandler<CreateQuestionCmd> {
+public class CreateQuestionHandler implements CommandHandler<CreateQuestionRequest> {
 
     private final QuestionRepository questionRepository;
 
@@ -21,11 +21,11 @@ public class CreateQuestionHandler implements CommandHandler<CreateQuestionCmd> 
     }
 
     @Override
-    public void handle(CreateQuestionCmd cmd) {
+    public void handle(CreateQuestionRequest cmd) {
         String id = IdGenerator.uuid();
         String authorId = "anon-user";
-        String authorName = "Anonymous";
-        String authorAvatar = "https://i.pravatar.cc/150?u=" + authorId;
+        String authorName = cmd.author_name() != null ? cmd.author_name() : "Anonymous";
+        String authorAvatar = cmd.author_avatar() != null ? cmd.author_avatar() : "https://i.pravatar.cc/150?u=" + authorId;
         Instant now = Instant.now();
 
         List<String> tagsList = cmd.tags() != null ? cmd.tags() : new ArrayList<>();
