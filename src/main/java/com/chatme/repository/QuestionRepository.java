@@ -21,7 +21,7 @@ public interface QuestionRepository extends FastRepository<Question, String> {
     List<Question> search(@Param("search") String search, @Param("limit") int limit, @Param("offset") int offset);
 
     @Select(value = "SELECT COUNT(*) FROM questions WHERE title ILIKE :search OR content ILIKE :search")
-    long countSearch(@Param("search") String search);
+    Long countSearch(@Param("search") String search);
 
     @Execute(value = "UPDATE questions SET views = views + 1 WHERE id = :id")
     void incrementViews(@Param("id") String id);
