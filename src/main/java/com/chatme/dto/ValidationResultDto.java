@@ -1,10 +1,12 @@
 package com.chatme.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 /**
  * Validation result DTO matching the FE ValidationResult interface.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record ValidationResultDto(
     boolean isValid,
     String message,
@@ -14,6 +16,7 @@ public record ValidationResultDto(
     CompatibilityMatrix compatibility_matrix,
     Recommendations recommendations
 ) {
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public record Scores(
         int overall,
         int performance,
@@ -23,6 +26,7 @@ public record ValidationResultDto(
         int cost_efficiency
     ) {}
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public record Analysis(
         List<String> strengths,
         List<String> weaknesses,
@@ -34,12 +38,14 @@ public record ValidationResultDto(
         String community_support
     ) {}
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public record CompatibilityMatrix(
         List<String> compatible_pairs,
         List<String> incompatible_pairs,
         List<String> suggestions
     ) {}
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public record Recommendations(
         List<String> immediate_actions,
         List<String> future_considerations,
