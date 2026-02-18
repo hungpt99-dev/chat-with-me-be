@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS documents (
 -- QA Feature Tables
 
 CREATE TABLE IF NOT EXISTS questions (
-    id UUID PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     author_id VARCHAR(100),
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS questions (
 );
 
 CREATE TABLE IF NOT EXISTS answers (
-    id UUID PRIMARY KEY,
-    question_id UUID NOT NULL,
+    id VARCHAR(255) PRIMARY KEY,
+    question_id VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     author_id VARCHAR(100),
     author_name VARCHAR(100),
@@ -35,12 +35,28 @@ CREATE TABLE IF NOT EXISTS answers (
 );
 
 CREATE TABLE IF NOT EXISTS answer_reactions (
-    id UUID PRIMARY KEY,
-    answer_id UUID NOT NULL,
+    id VARCHAR(255) PRIMARY KEY,
+    answer_id VARCHAR(255) NOT NULL,
     user_id VARCHAR(100),
     type VARCHAR(20),
     FOREIGN KEY (answer_id) REFERENCES answers(id),
     CONSTRAINT uk_reaction UNIQUE (answer_id, user_id, type)
+);
+
+-- Blog Posts Table
+CREATE TABLE IF NOT EXISTS blog_posts (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    body TEXT,
+    description TEXT,
+    author VARCHAR(100),
+    category VARCHAR(100),
+    image_url VARCHAR(255),
+    read_time VARCHAR(50),
+    created_date VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tags VARCHAR(255) ARRAY
 );
 
 -- Mock Data for Q&A (only inserts if table is empty)

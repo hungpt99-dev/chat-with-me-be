@@ -16,12 +16,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
+  flyway:
+    baseline-on-migrate: true
+
 
   # Spring AI - Google Gemini (GenAI)
   ai:
