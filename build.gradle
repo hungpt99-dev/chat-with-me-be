@@ -41,8 +41,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    // Spring AI - OpenAI (auto-configures ChatModel + EmbeddingModel)
-    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    // Spring AI - Google AI Gemini (API Key based)
+    implementation 'org.springframework.ai:spring-ai-starter-model-google-genai'
 
     // WebFlux for streaming (Flux/SSE support)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'

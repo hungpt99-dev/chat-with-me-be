@@ -11,7 +11,6 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -81,19 +80,16 @@ public class ValidateStackHandler implements QueryHandler<ValidateStackCmd, Vali
         try {
             String userPromptText = buildUserPrompt(cmd);
 
-            // Use Spring AI with JSON response format
+            // Use Spring AI with JSON response format for Gemini
             Prompt prompt = new Prompt(
                     List.of(
                             new SystemMessage(SYSTEM_PROMPT),
                             new UserMessage(userPromptText)
                     ),
-                    OpenAiChatOptions.builder()
-                            .model("gpt-3.5-turbo")
-                            .temperature(0.7)
-                            .maxTokens(1000)
-                            .responseFormat(new org.springframework.ai.openai.api.ResponseFormat(
-                                    org.springframework.ai.openai.api.ResponseFormat.Type.JSON_OBJECT, ""))
-                            .build()
+                    org.springframework.ai.chat.prompt.ChatOptions.builder()
+                        .model("gemini-1.5-flash")
+                        .temperature(0.7)
+                        .build()
             );
 
             var response = chatModel.call(prompt);
