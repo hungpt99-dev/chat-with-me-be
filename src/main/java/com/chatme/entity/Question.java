@@ -32,12 +32,10 @@ public class Question {
     private Instant createdAt;
 
     private int views;
-    
-    private String[] tags; 
 
     public Question() {}
 
-    public Question(String id, String title, String content, String authorId, String authorName, String authorAvatar, Instant createdAt, int views, String[] tags) {
+    public Question(String id, String title, String content, String authorId, String authorName, String authorAvatar, Instant createdAt, int views) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -46,7 +44,6 @@ public class Question {
         this.authorAvatar = authorAvatar;
         this.createdAt = createdAt;
         this.views = views;
-        this.tags = tags;
     }
 
     public static QuestionBuilder builder() {
@@ -77,9 +74,6 @@ public class Question {
     public int getViews() { return views; }
     public void setViews(int views) { this.views = views; }
 
-    public String[] getTags() { return tags; }
-    public void setTags(String[] tags) { this.tags = tags; }
-
     public static class QuestionBuilder {
         private String id;
         private String title;
@@ -89,7 +83,6 @@ public class Question {
         private String authorAvatar;
         private Instant createdAt;
         private int views;
-        private String[] tags;
 
         QuestionBuilder() {}
 
@@ -101,10 +94,9 @@ public class Question {
         public QuestionBuilder authorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; return this; }
         public QuestionBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
         public QuestionBuilder views(int views) { this.views = views; return this; }
-        public QuestionBuilder tags(String[] tags) { this.tags = tags; return this; }
 
         public Question build() {
-            return new Question(id, title, content, authorId, authorName, authorAvatar, createdAt, views, tags);
+            return new Question(id, title, content, authorId, authorName, authorAvatar, createdAt, views);
         }
     }
 }

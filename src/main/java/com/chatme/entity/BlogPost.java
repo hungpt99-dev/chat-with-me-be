@@ -36,12 +36,10 @@ public class BlogPost {
     
     @Column("updated_at")
     private Instant updatedAt;
-    
-    private String[] tags;
 
     public BlogPost() {}
 
-    public BlogPost(String id, String title, String body, String description, String author, String category, String imageUrl, String readTime, String createdDate, Instant createdAt, Instant updatedAt, String[] tags) {
+    public BlogPost(String id, String title, String body, String description, String author, String category, String imageUrl, String readTime, String createdDate, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -53,7 +51,6 @@ public class BlogPost {
         this.createdDate = createdDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.tags = tags;
     }
 
     public static BlogPostBuilder builder() {
@@ -93,9 +90,6 @@ public class BlogPost {
     public Instant getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
 
-    public String[] getTags() { return tags; }
-    public void setTags(String[] tags) { this.tags = tags; }
-
     public static class BlogPostBuilder {
         private String id;
         private String title;
@@ -108,7 +102,6 @@ public class BlogPost {
         private String createdDate;
         private Instant createdAt;
         private Instant updatedAt;
-        private String[] tags;
 
         BlogPostBuilder() {}
 
@@ -123,10 +116,9 @@ public class BlogPost {
         public BlogPostBuilder createdDate(String createdDate) { this.createdDate = createdDate; return this; }
         public BlogPostBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
         public BlogPostBuilder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
-        public BlogPostBuilder tags(String[] tags) { this.tags = tags; return this; }
 
         public BlogPost build() {
-            return new BlogPost(id, title, body, description, author, category, imageUrl, readTime, createdDate, createdAt, updatedAt, tags);
+            return new BlogPost(id, title, body, description, author, category, imageUrl, readTime, createdDate, createdAt, updatedAt);
         }
     }
 }

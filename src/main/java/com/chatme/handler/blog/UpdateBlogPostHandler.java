@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -21,8 +20,7 @@ public class UpdateBlogPostHandler implements CommandHandler<UpdateBlogPostHandl
         String description,
         String author,
         String category,
-        String imageUrl,
-        List<String> tags
+        String imageUrl
     ) {}
 
     private final BlogPostRepository blogPostRepository;
@@ -42,7 +40,6 @@ public class UpdateBlogPostHandler implements CommandHandler<UpdateBlogPostHandl
         post.setAuthor(SecurityUtils.getAuthorName(post.getAuthor()));
         if (cmd.category() != null) post.setCategory(cmd.category());
         if (cmd.imageUrl() != null) post.setImageUrl(cmd.imageUrl());
-        if (cmd.tags() != null) post.setTags(cmd.tags().toArray(new String[0]));
 
         post.setUpdatedAt(Instant.now());
 

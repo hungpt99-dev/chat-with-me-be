@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -24,8 +23,7 @@ public class CreateBlogPostHandler implements CommandHandler<CreateBlogPostHandl
         String description,
         String author,
         String category,
-        String imageUrl,
-        List<String> tags
+        String imageUrl
     ) {}
 
     private final BlogPostRepository blogPostRepository;
@@ -52,7 +50,6 @@ public class CreateBlogPostHandler implements CommandHandler<CreateBlogPostHandl
                 .author(SecurityUtils.getAuthorName(cmd.author() != null ? cmd.author() : "Admin"))
                 .category(cmd.category())
                 .imageUrl(cmd.imageUrl())
-                .tags(cmd.tags() != null ? cmd.tags().toArray(new String[0]) : new String[0])
                 .readTime(readTime)
                 .createdDate(createdDate)
                 .createdAt(Instant.now())

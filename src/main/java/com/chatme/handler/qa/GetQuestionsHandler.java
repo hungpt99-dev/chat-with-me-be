@@ -42,7 +42,6 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsHandler.Req
             private User author;
             private Instant created_at;
             private int answers_count;
-            private List<String> tags;
             private int views;
         }
 
@@ -123,7 +122,6 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsHandler.Req
             .created_at(q.getCreatedAt())
             .answers_count((int) answerRepository.countByQuestionId(q.getId()))
             .views(q.getViews())
-            .tags(q.getTags() != null ? List.of(q.getTags()) : List.of())
             .build();
     }
 }
