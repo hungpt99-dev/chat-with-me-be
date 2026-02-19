@@ -1,5 +1,6 @@
 package com.chatme.handler.blog;
 
+import com.chatme.config.SecurityUtils;
 import com.chatme.entity.BlogPost;
 import com.chatme.repository.BlogPostRepository;
 import com.fast.cqrs.cqrs.CommandHandler;
@@ -48,7 +49,7 @@ public class CreateBlogPostHandler implements CommandHandler<CreateBlogPostHandl
                 .title(cmd.title())
                 .body(cmd.content())
                 .description(cmd.description())
-                .author(cmd.author() != null ? cmd.author() : "Admin")
+                .author(SecurityUtils.getAuthorName(cmd.author() != null ? cmd.author() : "Admin"))
                 .category(cmd.category())
                 .imageUrl(cmd.imageUrl())
                 .tags(cmd.tags() != null ? cmd.tags().toArray(new String[0]) : new String[0])

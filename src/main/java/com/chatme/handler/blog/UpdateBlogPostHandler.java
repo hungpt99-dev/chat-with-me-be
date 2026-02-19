@@ -1,5 +1,6 @@
 package com.chatme.handler.blog;
 
+import com.chatme.config.SecurityUtils;
 import com.chatme.entity.BlogPost;
 import com.chatme.repository.BlogPostRepository;
 import com.fast.cqrs.cqrs.CommandHandler;
@@ -37,7 +38,8 @@ public class UpdateBlogPostHandler implements CommandHandler<UpdateBlogPostHandl
             post.setReadTime(calculateReadTime(cmd.content()));
         }
         if (cmd.description() != null) post.setDescription(cmd.description());
-        if (cmd.author() != null) post.setAuthor(cmd.author());
+        // Author is always taken from the JWT token, never from the request body
+        post.setAuthor(SecurityUtils.getAuthorName(post.getAuthor()));
         if (cmd.category() != null) post.setCategory(cmd.category());
         if (cmd.imageUrl() != null) post.setImageUrl(cmd.imageUrl());
         if (cmd.tags() != null) post.setTags(cmd.tags().toArray(new String[0]));

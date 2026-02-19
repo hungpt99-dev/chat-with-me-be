@@ -10,15 +10,12 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
+import com.chatme.repository.VectorStoreRepository;
 import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -42,7 +39,7 @@ public class ChatHandler implements QueryHandler<ChatHandler.Request, SseEmitter
 
     private final ChatModel chatModel;
     private final EmbeddingModel embeddingModel;
-    private final JdbcTemplate jdbcTemplate;
+    private final VectorStoreRepository vectorStoreRepository;
 
     private static final String SYSTEM_PROMPT = """
         You are Hung Pham, a full-stack developer answering questions about yourself on your portfolio website.
@@ -154,22 +151,9 @@ public class ChatHandler implements QueryHandler<ChatHandler.Request, SseEmitter
 
     private String searchVectorStore(String question) {
         try {
-            // Use Spring AI's EmbeddingModel
             float[] embedding = embeddingModel.embed(question);
-            String embeddingString = Arrays.toString(embedding); // [0.1, 0.2, ...] format works for PGVector
-
-            // Search using PGVector cosine distance (<->)
-            String sql = "SELECT content FROM documents ORDER BY embedding <-> ?::vector LIMIT 5";
-            
-            List<String> results = jdbcTemplate.query(sql, 
-                (rs, rowNum) -> rs.getString("content"), 
-                embeddingString
-            );
-
-            if (results.isEmpty()) return null;
-
-            return String.join("\n\n", results);
-
+            List<String> results = vectorStoreRepository.searchSimilar(embedding, 5);
+            return results.isEmpty() ? null : String.join("\n\n", results);
         } catch (Exception e) {
             log.error("Error searching vector store", e);
             return null;
