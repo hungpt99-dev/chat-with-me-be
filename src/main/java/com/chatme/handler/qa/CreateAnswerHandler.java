@@ -29,7 +29,7 @@ public class CreateAnswerHandler implements CommandHandler<CreateAnswerHandler.R
         String id = IdGenerator.uuid();
         String authorId = "anon-user";
         String authorName = "Anonymous";
-        String authorAvatar = "https://i.pravatar.cc/150?u=" + authorId;
+        String authorAvatar = "https://i.pravatar.cc/150?u=" + id;
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         Answer answer = Answer.builder()

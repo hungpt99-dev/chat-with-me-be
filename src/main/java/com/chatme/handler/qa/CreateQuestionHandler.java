@@ -31,7 +31,7 @@ public class CreateQuestionHandler implements CommandHandler<CreateQuestionHandl
         String id = IdGenerator.uuid();
         String authorId = "anon-user";
         String authorName = cmd.author_name() != null ? cmd.author_name() : "Anonymous";
-        String authorAvatar = cmd.author_avatar() != null ? cmd.author_avatar() : "https://i.pravatar.cc/150?u=" + authorId;
+        String authorAvatar = cmd.author_avatar() != null ? cmd.author_avatar() : "https://i.pravatar.cc/150?u=" + id;
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         Question question = Question.builder()
