@@ -45,7 +45,13 @@ app:
     max-tokens: 10
     refill-per-second: 1
   cors:
-    allowed-origins: ${CORS_ORIGINS:http://localhost:3000}
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:3001}
+  supabase:
+    url: ${SUPABASE_URL:https://your-project.supabase.co}
+    jwt-secret: ${SUPABASE_JWT_SECRET:}
+
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri: ${SUPABASE_URL:https://your-project.supabase.co}/auth/v1/.well-known/jwks.json
+spring.security.oauth2.resourceserver.jwt.issuer-uri: ${SUPABASE_URL:https://your-project.supabase.co}/auth/v1
 
 # Actuator for health checks
 management:
