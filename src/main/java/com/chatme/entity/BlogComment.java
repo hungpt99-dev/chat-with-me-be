@@ -4,7 +4,7 @@ import com.fast.cqrs.sql.repository.Column;
 import com.fast.cqrs.sql.repository.Id;
 import com.fast.cqrs.sql.repository.Table;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table("blog_comments")
 public class BlogComment {
@@ -21,11 +21,11 @@ public class BlogComment {
     private String content;
 
     @Column("created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     public BlogComment() {}
 
-    public BlogComment(String id, String postId, String authorName, String content, Instant createdAt) {
+    public BlogComment(String id, String postId, String authorName, String content, Timestamp createdAt) {
         this.id = id;
         this.postId = postId;
         this.authorName = authorName;
@@ -49,15 +49,15 @@ public class BlogComment {
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
 
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
     public static class BlogCommentBuilder {
         private String id;
         private String postId;
         private String authorName;
         private String content;
-        private Instant createdAt;
+        private Timestamp createdAt;
 
         BlogCommentBuilder() {}
 
@@ -65,7 +65,7 @@ public class BlogComment {
         public BlogCommentBuilder postId(String postId) { this.postId = postId; return this; }
         public BlogCommentBuilder authorName(String authorName) { this.authorName = authorName; return this; }
         public BlogCommentBuilder content(String content) { this.content = content; return this; }
-        public BlogCommentBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public BlogCommentBuilder createdAt(Timestamp createdAt) { this.createdAt = createdAt; return this; }
 
         public BlogComment build() {
             return new BlogComment(id, postId, authorName, content, createdAt);

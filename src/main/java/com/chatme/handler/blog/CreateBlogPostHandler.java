@@ -7,7 +7,7 @@ import com.fast.cqrs.cqrs.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -52,8 +52,8 @@ public class CreateBlogPostHandler implements CommandHandler<CreateBlogPostHandl
                 .imageUrl(cmd.imageUrl())
                 .readTime(readTime)
                 .createdDate(createdDate)
-                .createdAt(Instant.now())
-                .updatedAt(Instant.now())
+                .createdAt(new Timestamp(System.currentTimeMillis()))
+                .updatedAt(new Timestamp(System.currentTimeMillis()))
                 .build();
 
         blogPostRepository.save(post);

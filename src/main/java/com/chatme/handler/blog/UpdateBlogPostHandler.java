@@ -7,7 +7,7 @@ import com.fast.cqrs.cqrs.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +41,7 @@ public class UpdateBlogPostHandler implements CommandHandler<UpdateBlogPostHandl
         if (cmd.category() != null) post.setCategory(cmd.category());
         if (cmd.imageUrl() != null) post.setImageUrl(cmd.imageUrl());
 
-        post.setUpdatedAt(Instant.now());
+        post.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
         blogPostRepository.save(post);
     }

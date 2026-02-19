@@ -8,7 +8,7 @@ import com.fast.cqrs.cqrs.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import com.chatme.event.CommentAddedEvent;
@@ -33,7 +33,7 @@ public class AddCommentHandler implements CommandHandler<AddCommentHandler.Reque
                 .postId(cmd.postId())
                 .authorName(cmd.author())
                 .content(cmd.content())
-                .createdAt(Instant.now())
+                .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
         
         blogCommentRepository.save(comment);
@@ -44,7 +44,7 @@ public class AddCommentHandler implements CommandHandler<AddCommentHandler.Reque
                 comment.getAuthorName(),
                 comment.getContent(),
                 post.getAuthor(),
-                comment.getCreatedAt()
+                comment.getCreatedAt() != null ? comment.getCreatedAt().toInstant() : null
         ));
     }
 }

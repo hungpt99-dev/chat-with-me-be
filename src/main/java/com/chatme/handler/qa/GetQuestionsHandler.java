@@ -119,7 +119,7 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsHandler.Req
                 .name(q.getAuthorName())
                 .avatar_url(q.getAuthorAvatar())
                 .build())
-            .created_at(q.getCreatedAt())
+            .created_at(q.getCreatedAt() != null ? q.getCreatedAt().toInstant() : null)
             .answers_count((int) answerRepository.countByQuestionId(q.getId()))
             .views(q.getViews())
             .build();

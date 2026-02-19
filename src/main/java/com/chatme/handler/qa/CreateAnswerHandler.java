@@ -7,7 +7,7 @@ import com.fast.cqrs.util.IdGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Component
 public class CreateAnswerHandler implements CommandHandler<CreateAnswerHandler.Request> {
@@ -30,7 +30,7 @@ public class CreateAnswerHandler implements CommandHandler<CreateAnswerHandler.R
         String authorId = "anon-user";
         String authorName = "Anonymous";
         String authorAvatar = "https://i.pravatar.cc/150?u=" + authorId;
-        Instant now = Instant.now();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
 
         Answer answer = Answer.builder()
             .id(id)

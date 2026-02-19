@@ -114,7 +114,7 @@ public class GetAnswersHandler implements QueryHandler<GetAnswersHandler.Request
                 .name(a.getAuthorName())
                 .avatar_url(a.getAuthorAvatar())
                 .build())
-            .created_at(a.getCreatedAt())
+            .created_at(a.getCreatedAt() != null ? a.getCreatedAt().toInstant() : null)
             .reactions(getReactions(a.getId()))
             .build();
     }

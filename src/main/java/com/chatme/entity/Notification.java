@@ -3,7 +3,7 @@ package com.chatme.entity;
 import com.fast.cqrs.sql.repository.Column;
 import com.fast.cqrs.sql.repository.Id;
 import com.fast.cqrs.sql.repository.Table;
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table("notifications")
 public class Notification {
@@ -21,11 +21,11 @@ public class Notification {
     private boolean isRead;
     
     @Column("created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     public Notification() {}
 
-    public Notification(String id, String userId, String type, String message, boolean isRead, Instant createdAt) {
+    public Notification(String id, String userId, String type, String message, boolean isRead, Timestamp createdAt) {
         this.id = id;
         this.userId = userId;
         this.type = type;
@@ -53,8 +53,8 @@ public class Notification {
     public boolean getIsRead() { return isRead; }
     public void setIsRead(boolean isRead) { this.isRead = isRead; }
 
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
     public static class NotificationBuilder {
         private String id;
@@ -62,7 +62,7 @@ public class Notification {
         private String type;
         private String message;
         private boolean isRead;
-        private Instant createdAt;
+        private Timestamp createdAt;
 
         NotificationBuilder() {}
 
@@ -71,7 +71,7 @@ public class Notification {
         public NotificationBuilder type(String type) { this.type = type; return this; }
         public NotificationBuilder message(String message) { this.message = message; return this; }
         public NotificationBuilder isRead(boolean isRead) { this.isRead = isRead; return this; }
-        public NotificationBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public NotificationBuilder createdAt(Timestamp createdAt) { this.createdAt = createdAt; return this; }
 
         public Notification build() {
             return new Notification(id, userId, type, message, isRead, createdAt);

@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table("blog_posts")
 public class BlogPost {
@@ -32,14 +32,14 @@ public class BlogPost {
     private String createdDate;
     
     @Column("created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
     
     @Column("updated_at")
-    private Instant updatedAt;
+    private Timestamp updatedAt;
 
     public BlogPost() {}
 
-    public BlogPost(String id, String title, String body, String description, String author, String category, String imageUrl, String readTime, String createdDate, Instant createdAt, Instant updatedAt) {
+    public BlogPost(String id, String title, String body, String description, String author, String category, String imageUrl, String readTime, String createdDate, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -84,11 +84,11 @@ public class BlogPost {
     public String getCreatedDate() { return createdDate; }
     public void setCreatedDate(String createdDate) { this.createdDate = createdDate; }
 
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
-    public Instant getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
+    public Timestamp getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; }
 
     public static class BlogPostBuilder {
         private String id;
@@ -100,8 +100,8 @@ public class BlogPost {
         private String imageUrl;
         private String readTime;
         private String createdDate;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private Timestamp createdAt;
+        private Timestamp updatedAt;
 
         BlogPostBuilder() {}
 
@@ -114,8 +114,8 @@ public class BlogPost {
         public BlogPostBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
         public BlogPostBuilder readTime(String readTime) { this.readTime = readTime; return this; }
         public BlogPostBuilder createdDate(String createdDate) { this.createdDate = createdDate; return this; }
-        public BlogPostBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
-        public BlogPostBuilder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+        public BlogPostBuilder createdAt(Timestamp createdAt) { this.createdAt = createdAt; return this; }
+        public BlogPostBuilder updatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public BlogPost build() {
             return new BlogPost(id, title, body, description, author, category, imageUrl, readTime, createdDate, createdAt, updatedAt);

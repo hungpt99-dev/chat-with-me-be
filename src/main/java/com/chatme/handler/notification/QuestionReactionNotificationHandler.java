@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public class QuestionReactionNotificationHandler implements EventHandler<Questio
                 .type(type)
                 .message(message)
                 .isRead(false)
-                .createdAt(Instant.now())
+                .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
         
         notificationRepository.save(notification);

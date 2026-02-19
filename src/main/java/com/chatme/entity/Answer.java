@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table("answers")
 public class Answer {
@@ -31,11 +31,11 @@ public class Answer {
     private String authorAvatar;
 
     @Column("created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     public Answer() {}
 
-    public Answer(String id, String questionId, String content, String authorId, String authorName, String authorAvatar, Instant createdAt) {
+    public Answer(String id, String questionId, String content, String authorId, String authorName, String authorAvatar, Timestamp createdAt) {
         this.id = id;
         this.questionId = questionId;
         this.content = content;
@@ -67,8 +67,8 @@ public class Answer {
     public String getAuthorAvatar() { return authorAvatar; }
     public void setAuthorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; }
 
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
     public static class AnswerBuilder {
         private String id;
@@ -77,7 +77,7 @@ public class Answer {
         private String authorId;
         private String authorName;
         private String authorAvatar;
-        private Instant createdAt;
+        private Timestamp createdAt;
 
         AnswerBuilder() {}
 
@@ -87,7 +87,7 @@ public class Answer {
         public AnswerBuilder authorId(String authorId) { this.authorId = authorId; return this; }
         public AnswerBuilder authorName(String authorName) { this.authorName = authorName; return this; }
         public AnswerBuilder authorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; return this; }
-        public AnswerBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public AnswerBuilder createdAt(Timestamp createdAt) { this.createdAt = createdAt; return this; }
 
         public Answer build() {
             return new Answer(id, questionId, content, authorId, authorName, authorAvatar, createdAt);

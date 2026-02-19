@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table("questions")
 public class Question {
@@ -29,13 +29,13 @@ public class Question {
     private String authorAvatar;
 
     @Column("created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     private int views;
 
     public Question() {}
 
-    public Question(String id, String title, String content, String authorId, String authorName, String authorAvatar, Instant createdAt, int views) {
+    public Question(String id, String title, String content, String authorId, String authorName, String authorAvatar, Timestamp createdAt, int views) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -68,8 +68,8 @@ public class Question {
     public String getAuthorAvatar() { return authorAvatar; }
     public void setAuthorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; }
 
-    public Instant getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
     public int getViews() { return views; }
     public void setViews(int views) { this.views = views; }
@@ -81,7 +81,7 @@ public class Question {
         private String authorId;
         private String authorName;
         private String authorAvatar;
-        private Instant createdAt;
+        private Timestamp createdAt;
         private int views;
 
         QuestionBuilder() {}
@@ -92,7 +92,7 @@ public class Question {
         public QuestionBuilder authorId(String authorId) { this.authorId = authorId; return this; }
         public QuestionBuilder authorName(String authorName) { this.authorName = authorName; return this; }
         public QuestionBuilder authorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; return this; }
-        public QuestionBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public QuestionBuilder createdAt(Timestamp createdAt) { this.createdAt = createdAt; return this; }
         public QuestionBuilder views(int views) { this.views = views; return this; }
 
         public Question build() {

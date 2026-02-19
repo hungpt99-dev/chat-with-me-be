@@ -43,7 +43,7 @@ public class GetPostCommentsHandler implements QueryHandler<GetPostCommentsHandl
                 .id(comment.getId())
                 .author(comment.getAuthorName())
                 .content(comment.getContent())
-                .created_at(comment.getCreatedAt())
+                .created_at(comment.getCreatedAt() != null ? comment.getCreatedAt().toInstant() : null)
                 .build();
     }
 }

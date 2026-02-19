@@ -53,7 +53,7 @@ public class GetNotificationsHandler implements QueryHandler<GetNotificationsHan
                 .type(notification.getType())
                 .message(notification.getMessage())
                 .is_read(notification.getIsRead())
-                .created_at(notification.getCreatedAt())
+                .created_at(notification.getCreatedAt() != null ? notification.getCreatedAt().toInstant() : null)
                 .build();
     }
 }
