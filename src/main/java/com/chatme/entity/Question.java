@@ -10,10 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table("questions")
 public class Question {
 
@@ -38,4 +34,77 @@ public class Question {
     private int views;
     
     private String[] tags; 
+
+    public Question() {}
+
+    public Question(String id, String title, String content, String authorId, String authorName, String authorAvatar, Instant createdAt, int views, String[] tags) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.authorId = authorId;
+        this.authorName = authorName;
+        this.authorAvatar = authorAvatar;
+        this.createdAt = createdAt;
+        this.views = views;
+        this.tags = tags;
+    }
+
+    public static QuestionBuilder builder() {
+        return new QuestionBuilder();
+    }
+
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
+
+    public String getAuthorId() { return authorId; }
+    public void setAuthorId(String authorId) { this.authorId = authorId; }
+
+    public String getAuthorName() { return authorName; }
+    public void setAuthorName(String authorName) { this.authorName = authorName; }
+
+    public String getAuthorAvatar() { return authorAvatar; }
+    public void setAuthorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; }
+
+    public Instant getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+
+    public int getViews() { return views; }
+    public void setViews(int views) { this.views = views; }
+
+    public String[] getTags() { return tags; }
+    public void setTags(String[] tags) { this.tags = tags; }
+
+    public static class QuestionBuilder {
+        private String id;
+        private String title;
+        private String content;
+        private String authorId;
+        private String authorName;
+        private String authorAvatar;
+        private Instant createdAt;
+        private int views;
+        private String[] tags;
+
+        QuestionBuilder() {}
+
+        public QuestionBuilder id(String id) { this.id = id; return this; }
+        public QuestionBuilder title(String title) { this.title = title; return this; }
+        public QuestionBuilder content(String content) { this.content = content; return this; }
+        public QuestionBuilder authorId(String authorId) { this.authorId = authorId; return this; }
+        public QuestionBuilder authorName(String authorName) { this.authorName = authorName; return this; }
+        public QuestionBuilder authorAvatar(String authorAvatar) { this.authorAvatar = authorAvatar; return this; }
+        public QuestionBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public QuestionBuilder views(int views) { this.views = views; return this; }
+        public QuestionBuilder tags(String[] tags) { this.tags = tags; return this; }
+
+        public Question build() {
+            return new Question(id, title, content, authorId, authorName, authorAvatar, createdAt, views, tags);
+        }
+    }
 }

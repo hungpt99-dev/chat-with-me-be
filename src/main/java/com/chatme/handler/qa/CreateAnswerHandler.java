@@ -1,16 +1,22 @@
 package com.chatme.handler.qa;
 
-import com.chatme.dto.qa.CreateAnswerCmd;
 import com.chatme.entity.Answer;
 import com.chatme.repository.AnswerRepository;
 import com.fast.cqrs.cqrs.CommandHandler;
 import com.fast.cqrs.util.IdGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
 @Component
-public class CreateAnswerHandler implements CommandHandler<CreateAnswerCmd> {
+public class CreateAnswerHandler implements CommandHandler<CreateAnswerHandler.Request> {
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record Request(
+        String questionId,
+        String content
+    ) {}
 
     private final AnswerRepository answerRepository;
 
@@ -19,7 +25,7 @@ public class CreateAnswerHandler implements CommandHandler<CreateAnswerCmd> {
     }
 
     @Override
-    public void handle(CreateAnswerCmd cmd) {
+    public void handle(Request cmd) {
         String id = IdGenerator.uuid();
         String authorId = "anon-user";
         String authorName = "Anonymous";

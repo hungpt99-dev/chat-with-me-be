@@ -1,12 +1,9 @@
 package com.chatme.controller;
 
-import com.chatme.dto.GetGitHubInsightsQuery;
-import com.chatme.dto.GetGitHubUserQuery;
-import com.chatme.dto.GitHubInsightsDto;
-import com.chatme.dto.GitHubUserDto;
-import com.chatme.handler.GetGitHubInsightsHandler;
-import com.chatme.handler.GetGitHubReposHandler;
-import com.chatme.handler.GetGitHubUserHandler;
+
+import com.chatme.handler.github.GetGitHubInsightsHandler;
+import com.chatme.handler.github.GetGitHubReposHandler;
+import com.chatme.handler.github.GetGitHubUserHandler;
 import com.fast.cqrs.cqrs.annotation.HttpController;
 import com.fast.cqrs.cqrs.annotation.Query;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +16,13 @@ public interface GitHubController {
 
     @GetMapping("/insights")
     @Query(handler = GetGitHubInsightsHandler.class, cache = "5m")
-    GitHubInsightsDto getInsights(@ModelAttribute GetGitHubInsightsQuery query);
+    GetGitHubInsightsHandler.Response getInsights(@ModelAttribute GetGitHubInsightsHandler.Query query);
 
     @GetMapping("/user")
     @Query(handler = GetGitHubUserHandler.class, cache = "5m")
-    GitHubUserDto getUser(@ModelAttribute GetGitHubUserQuery query);
+    GetGitHubUserHandler.Response getUser(@ModelAttribute GetGitHubUserHandler.Request query);
 
     @GetMapping("/repos")
     @Query(handler = GetGitHubReposHandler.class, cache = "10m")
-    java.util.List<com.chatme.dto.GitHubRepoDto> getRepos(@ModelAttribute com.chatme.dto.GetGitHubReposQuery query);
+    java.util.List<GetGitHubReposHandler.Repo> getRepos(@ModelAttribute GetGitHubReposHandler.Query query);
 }

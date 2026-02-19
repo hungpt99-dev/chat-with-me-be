@@ -1,17 +1,70 @@
 package com.chatme.handler.qa;
 
-import com.chatme.dto.qa.*;
 import com.chatme.entity.Question;
 import com.chatme.repository.QuestionRepository;
 import com.chatme.repository.AnswerRepository;
 import com.fast.cqrs.cqrs.QueryHandler;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class GetQuestionsHandler implements QueryHandler<GetQuestionsQuery, QuestionsResponse> {
+public class GetQuestionsHandler implements QueryHandler<GetQuestionsHandler.Request, GetQuestionsHandler.Response> {
+
+    @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record Request(
+        int page,
+        int limit,
+        String sort,
+        String search
+    ) {}
+
+    @Builder
+    @Getter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Response {
+        private List<QuestionDto> data;
+        private Meta meta;
+
+        @Builder
+        @Getter
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class QuestionDto {
+            private String id;
+            private String title;
+            private String content;
+            private User author;
+            private Instant created_at;
+            private int answers_count;
+            private List<String> tags;
+            private int views;
+        }
+
+        @Builder
+        @Getter
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class User {
+            private String id;
+            private String name;
+            private String avatar_url;
+        }
+
+        @Builder
+        @Getter
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Meta {
+            private long total;
+            private int page;
+            private int limit;
+            private int total_pages;
+        }
+    }
 
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
@@ -22,7 +75,7 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsQuery, Ques
     }
 
     @Override
-    public QuestionsResponse handle(GetQuestionsQuery query) {
+    public Response handle(Request query) {
         int page = query.page() < 1 ? 1 : query.page();
         int limit = query.limit() < 1 ? 10 : query.limit();
         int offset = (page - 1) * limit;
@@ -42,13 +95,13 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsQuery, Ques
             total = questionRepository.count();
         }
 
-        List<QuestionDto> dtos = questions.stream()
+        List<Response.QuestionDto> dtos = questions.stream()
             .map(this::mapQuestion)
             .collect(Collectors.toList());
 
-        return QuestionsResponse.builder()
+        return Response.builder()
             .data(dtos)
-            .meta(QuestionsResponse.Meta.builder()
+            .meta(Response.Meta.builder()
                 .total(total)
                 .page(page)
                 .limit(limit)
@@ -57,12 +110,12 @@ public class GetQuestionsHandler implements QueryHandler<GetQuestionsQuery, Ques
             .build();
     }
 
-    private QuestionDto mapQuestion(Question q) {
-        return QuestionDto.builder()
+    private Response.QuestionDto mapQuestion(Question q) {
+        return Response.QuestionDto.builder()
             .id(q.getId())
             .title(q.getTitle())
             .content(q.getContent())
-            .author(UserDto.builder()
+            .author(Response.User.builder()
                 .id(q.getAuthorId())
                 .name(q.getAuthorName())
                 .avatar_url(q.getAuthorAvatar())

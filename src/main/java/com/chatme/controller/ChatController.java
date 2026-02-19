@@ -1,7 +1,6 @@
 package com.chatme.controller;
 
-import com.chatme.dto.ChatRequest;
-import com.chatme.handler.ChatHandler;
+import com.chatme.handler.ai.ChatHandler;
 import com.fast.cqrs.cqrs.annotation.HttpController;
 import com.fast.cqrs.cqrs.annotation.Query;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,5 +14,5 @@ public interface ChatController {
 
     @PostMapping
     @Query(handler = ChatHandler.class)
-    SseEmitter chat(@RequestBody ChatRequest request);
+    SseEmitter chat(@RequestBody ChatHandler.Request request);
 }

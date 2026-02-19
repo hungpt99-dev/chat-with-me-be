@@ -1,18 +1,44 @@
 package com.chatme.handler.qa;
 
-import com.chatme.dto.qa.GetQuestionQuery;
-import com.chatme.dto.qa.QuestionDto;
-import com.chatme.dto.qa.UserDto;
 import com.chatme.entity.Question;
 import com.chatme.repository.QuestionRepository;
 import com.chatme.repository.AnswerRepository;
 import com.fast.cqrs.cqrs.QueryHandler;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.List;
 
 @Component
-public class GetQuestionHandler implements QueryHandler<GetQuestionQuery, QuestionDto> {
+public class GetQuestionHandler implements QueryHandler<GetQuestionHandler.Request, GetQuestionHandler.Response> {
+
+    public record Request(String id) {}
+
+    @Builder
+    @Getter
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Response {
+        private String id;
+        private String title;
+        private String content;
+        private User author;
+        private Instant created_at;
+        private int answers_count;
+        private List<String> tags;
+        private int views;
+
+        @Builder
+        @Getter
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class User {
+            private String id;
+            private String name;
+            private String avatar_url;
+        }
+    }
 
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
@@ -23,7 +49,7 @@ public class GetQuestionHandler implements QueryHandler<GetQuestionQuery, Questi
     }
 
     @Override
-    public QuestionDto handle(GetQuestionQuery query) {
+    public Response handle(Request query) {
         // Increment views
         questionRepository.incrementViews(query.id());
 
@@ -33,12 +59,12 @@ public class GetQuestionHandler implements QueryHandler<GetQuestionQuery, Questi
         return mapQuestion(q);
     }
 
-    private QuestionDto mapQuestion(Question q) {
-        return QuestionDto.builder()
+    private Response mapQuestion(Question q) {
+        return Response.builder()
             .id(q.getId())
             .title(q.getTitle())
             .content(q.getContent())
-            .author(UserDto.builder()
+            .author(Response.User.builder()
                 .id(q.getAuthorId())
                 .name(q.getAuthorName())
                 .avatar_url(q.getAuthorAvatar())

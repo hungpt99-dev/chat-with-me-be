@@ -1,8 +1,6 @@
 package com.chatme.controller;
 
-import com.chatme.dto.ValidateStackCmd;
-import com.chatme.dto.ValidationResultDto;
-import com.chatme.handler.ValidateStackHandler;
+import com.chatme.handler.ai.ValidateStackHandler;
 import com.fast.cqrs.cqrs.annotation.HttpController;
 import com.fast.cqrs.cqrs.annotation.Query;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,5 +17,5 @@ public interface ValidateStackController {
      */
     @PostMapping
     @Query(handler = ValidateStackHandler.class)
-    ValidationResultDto validate(@RequestBody ValidateStackCmd cmd);
+    ValidateStackHandler.Response validate(@RequestBody ValidateStackHandler.Request cmd);
 }
