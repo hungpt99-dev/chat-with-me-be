@@ -3,7 +3,7 @@ package com.chatme.handler.github;
 import com.fast.cqrs.cqrs.QueryHandler;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,6 @@ public class GetGitHubUserHandler implements QueryHandler<GetGitHubUserHandler.R
     private static final long CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
 
     private final RestClient githubRestClient;
-    private final ObjectMapper objectMapper;
 
     @Value("${app.github.username}")
     private String username;
@@ -52,11 +51,8 @@ public class GetGitHubUserHandler implements QueryHandler<GetGitHubUserHandler.R
         }
     }
 
-    public GetGitHubUserHandler(
-            @Qualifier("githubRestClient") RestClient githubRestClient,
-            ObjectMapper objectMapper) {
+    public GetGitHubUserHandler(@Qualifier("githubRestClient") RestClient githubRestClient) {
         this.githubRestClient = githubRestClient;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -68,13 +64,14 @@ public class GetGitHubUserHandler implements QueryHandler<GetGitHubUserHandler.R
         }
 
         try {
-            String responseStr = githubRestClient.get()
+            Response user = githubRestClient.get()
                     .uri("/users/{username}", username)
                     .retrieve()
-                    .body(String.class);
+                    .body(Response.class);
 
-            Response user = objectMapper.readValue(responseStr, Response.class);
-            cache.put(cacheKey, new CacheEntry(user, System.currentTimeMillis()));
+            if (user != null) {
+                cache.put(cacheKey, new CacheEntry(user, System.currentTimeMillis()));
+            }
             return user;
 
         } catch (Exception e) {

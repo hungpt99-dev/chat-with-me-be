@@ -2,8 +2,7 @@ package com.chatme.handler.github;
 
 import com.fast.cqrs.cqrs.QueryHandler;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,6 @@ public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsH
     private static final long CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
 
     private final RestClient githubRestClient;
-    private final ObjectMapper objectMapper;
 
     @Value("${app.github.username}")
     private String username;
@@ -52,11 +50,16 @@ public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsH
         }
     }
 
-    public GetGitHubInsightsHandler(
-            @Qualifier("githubRestClient") RestClient githubRestClient,
-            ObjectMapper objectMapper) {
+    // Minimal record for fetching repos
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private record GithubRepo(
+        String name,
+        String language,
+        @JsonProperty("stargazers_count") int stargazersCount
+    ) {}
+
+    public GetGitHubInsightsHandler(@Qualifier("githubRestClient") RestClient githubRestClient) {
         this.githubRestClient = githubRestClient;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -68,14 +71,13 @@ public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsH
         }
 
         try {
-            JsonNode repos = fetchRepos();
+            List<GithubRepo> repos = fetchRepos();
 
             // Compute language stats
             Map<String, Integer> languageMap = new LinkedHashMap<>();
-            for (JsonNode repo : repos) {
-                if (repo.has("language") && !repo.get("language").isNull()) {
-                    String lang = repo.get("language").asText();
-                    languageMap.merge(lang, 1, Integer::sum);
+            for (GithubRepo repo : repos) {
+                if (repo.language() != null) {
+                    languageMap.merge(repo.language(), 1, Integer::sum);
                 }
             }
 
@@ -86,19 +88,15 @@ public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsH
                     .toList();
 
             // Top repos by stars
+            List<GithubRepo> sortedRepos = new ArrayList<>(repos);
+            sortedRepos.sort((a, b) -> Integer.compare(b.stargazersCount(), a.stargazersCount()));
+
             List<Response.RepoStat> topRepos = new ArrayList<>();
-            List<JsonNode> repoList = new ArrayList<>();
-            repos.forEach(repoList::add);
-            repoList.sort((a, b) -> {
-                int starsA = a.has("stargazers_count") ? a.get("stargazers_count").asInt() : 0;
-                int starsB = b.has("stargazers_count") ? b.get("stargazers_count").asInt() : 0;
-                return Integer.compare(starsB, starsA);
-            });
-            for (int i = 0; i < Math.min(5, repoList.size()); i++) {
-                JsonNode repo = repoList.get(i);
+            for (int i = 0; i < Math.min(5, sortedRepos.size()); i++) {
+                GithubRepo repo = sortedRepos.get(i);
                 topRepos.add(new Response.RepoStat(
-                        repo.get("name").asText(),
-                        repo.has("stargazers_count") ? repo.get("stargazers_count").asInt() : 0
+                        repo.name(),
+                        repo.stargazersCount()
                 ));
             }
 
@@ -112,12 +110,12 @@ public class GetGitHubInsightsHandler implements QueryHandler<GetGitHubInsightsH
         }
     }
 
-    private JsonNode fetchRepos() throws Exception {
-        String response = githubRestClient.get()
+    private List<GithubRepo> fetchRepos() {
+        List<GithubRepo> repos = githubRestClient.get()
                 .uri("/users/{username}/repos?sort=updated&per_page=100", username)
                 .retrieve()
-                .body(String.class);
-
-        return objectMapper.readTree(response);
+                .body(new org.springframework.core.ParameterizedTypeReference<>() {});
+        
+        return repos != null ? repos : List.of();
     }
 }

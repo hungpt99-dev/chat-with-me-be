@@ -66,9 +66,7 @@ public class ChatHandler implements QueryHandler<ChatHandler.Request, SseEmitter
 
     private static final String FALLBACK_CONTEXT = """
         I am Hung Pham, a full-stack developer.
-        I have worked at ePhilos AG as a Full Stack Developer, as a freelance Web Developer, and as a NodeJS Developer intern at HM Communication.
-        My skills include React, Next.js, JavaScript, TypeScript, HTML, CSS, Node.js, and more.
-        My email is oublihi.a@gmail.com.
+        I have worked at VG as a Full Stack Developer.
         """;
 
 

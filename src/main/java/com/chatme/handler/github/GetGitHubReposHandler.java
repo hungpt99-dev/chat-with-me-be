@@ -3,8 +3,7 @@ package com.chatme.handler.github;
 import com.fast.cqrs.cqrs.QueryHandler;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +45,7 @@ public class GetGitHubReposHandler implements QueryHandler<GetGitHubReposHandler
     private static final long CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes cache
 
     private final RestClient githubRestClient;
-    private final ObjectMapper objectMapper;
-
+    
     @Value("${app.github.username}")
     private String username;
 
@@ -59,11 +57,8 @@ public class GetGitHubReposHandler implements QueryHandler<GetGitHubReposHandler
         }
     }
 
-    public GetGitHubReposHandler(
-            @Qualifier("githubRestClient") RestClient githubRestClient,
-            ObjectMapper objectMapper) {
+    public GetGitHubReposHandler(@Qualifier("githubRestClient") RestClient githubRestClient) {
         this.githubRestClient = githubRestClient;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -75,15 +70,14 @@ public class GetGitHubReposHandler implements QueryHandler<GetGitHubReposHandler
         }
 
         try {
-            String response = githubRestClient.get()
+            List<Repo> repos = githubRestClient.get()
                     .uri("/users/{username}/repos?sort=updated&per_page=100&type=owner", username)
                     .retrieve()
-                    .body(String.class);
+                    .body(new org.springframework.core.ParameterizedTypeReference<>() {});
 
-            List<Repo> repos = objectMapper.readValue(response, new TypeReference<List<Repo>>() {});
-            
-            // Filter out forks if needed, or keep them. 
-            // The frontend displays all, so we return all for now.
+            if (repos == null) {
+                repos = List.of();
+            }
             
             cache.put(cacheKey, new CacheEntry(repos, System.currentTimeMillis()));
             return repos;

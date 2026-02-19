@@ -2,7 +2,7 @@ package com.chatme.handler.ai;
 
 import com.fast.cqrs.cqrs.QueryHandler;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +99,6 @@ public class ValidateStackHandler implements QueryHandler<ValidateStackHandler.R
     private static final Logger log = LoggerFactory.getLogger(ValidateStackHandler.class);
 
     private final ChatModel chatModel;
-    private final ObjectMapper objectMapper;
 
     private static final String SYSTEM_PROMPT = """
         You are a technology stack validator. Analyze the provided technology stack and return a detailed analysis in JSON format with the following structure:
@@ -141,15 +140,15 @@ public class ValidateStackHandler implements QueryHandler<ValidateStackHandler.R
         Be specific in your recommendations and provide actionable insights.
         """;
 
-    public ValidateStackHandler(ChatModel chatModel, ObjectMapper objectMapper) {
+    public ValidateStackHandler(ChatModel chatModel) {
         this.chatModel = chatModel;
-        this.objectMapper = objectMapper;
     }
 
     @Override
     public Response handle(Request cmd) {
         try {
             String userPromptText = buildUserPrompt(cmd);
+            var converter = new org.springframework.ai.converter.BeanOutputConverter<>(Response.class);
 
             // Use Spring AI with JSON response format for Gemini
             Prompt prompt = new Prompt(
@@ -166,7 +165,7 @@ public class ValidateStackHandler implements QueryHandler<ValidateStackHandler.R
             var response = chatModel.call(prompt);
             String content = response.getResult().getOutput().getText();
 
-            return objectMapper.readValue(content, Response.class);
+            return converter.convert(content);
 
         } catch (Exception e) {
             log.error("Error validating tech stack", e);
