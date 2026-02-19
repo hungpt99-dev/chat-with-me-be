@@ -1,27 +1,16 @@
 package com.chatme.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import com.chatme.entity.Document;
+import com.fast.cqrs.sql.annotation.Param;
+import com.fast.cqrs.sql.annotation.Select;
+import com.fast.cqrs.sql.annotation.SqlRepository;
+import com.fast.cqrs.sql.repository.FastRepository;
 
-import java.util.Arrays;
 import java.util.List;
 
-@Repository
-@RequiredArgsConstructor
-public class VectorStoreRepository {
+@SqlRepository
+public interface VectorStoreRepository extends FastRepository<Document, String> {
 
-    private static final Logger log = LoggerFactory.getLogger(VectorStoreRepository.class);
-
-    private final JdbcTemplate jdbcTemplate;
-
-    public List<String> searchSimilar(float[] embedding, int limit) {
-        String embeddingStr = Arrays.toString(embedding);
-        String sql = "SELECT content FROM documents ORDER BY embedding <-> ?::vector LIMIT ?";
-        return jdbcTemplate.query(sql,
-                (rs, rowNum) -> rs.getString("content"),
-                embeddingStr, limit);
-    }
+    @Select("SELECT id, content FROM documents ORDER BY embedding <-> :embedding::vector LIMIT :limit")
+    List<Document> searchSimilar(@Param("embedding") String embedding, @Param("limit") int limit);
 }

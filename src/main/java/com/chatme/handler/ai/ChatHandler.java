@@ -1,6 +1,8 @@
 package com.chatme.handler.ai;
 
 
+import com.chatme.entity.Document;
+import com.chatme.repository.VectorStoreRepository;
 import com.fast.cqrs.cqrs.QueryHandler;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.RequiredArgsConstructor;
@@ -10,14 +12,14 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
-import com.chatme.repository.VectorStoreRepository;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * Handler for AI chat with RAG via Supabase vector store.
@@ -152,7 +154,12 @@ public class ChatHandler implements QueryHandler<ChatHandler.Request, SseEmitter
     private String searchVectorStore(String question) {
         try {
             float[] embedding = embeddingModel.embed(question);
-            List<String> results = vectorStoreRepository.searchSimilar(embedding, 5);
+            List<String> results = vectorStoreRepository
+                    .searchSimilar(Arrays.toString(embedding), 5)
+                    .stream()
+                    .map(Document::getContent)
+                    .filter(c -> c != null && !c.isBlank())
+                    .collect(Collectors.toList());
             return results.isEmpty() ? null : String.join("\n\n", results);
         } catch (Exception e) {
             log.error("Error searching vector store", e);
